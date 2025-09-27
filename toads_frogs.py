@@ -59,6 +59,13 @@ quit_button = pygame.Rect(WIDTH // 2 + spacing//2,
 def draw_board():
     screen.fill(WHITE)
 
+    # Mostrar turno
+    font_turn = pygame.font.SysFont(None, 50)
+    if not game_over:
+        turn_text = "Toads turn" if turn == 1 else "Frogs turn"
+        text_surface = font_turn.render(turn_text, True, BLACK)
+        screen.blit(text_surface, (10, HEIGHT - 90))  # Arriba del área de botones
+
     # Dibujar tablero
     for i in range(BOARD_SIZE):
         rect = pygame.Rect(i * SQUARE_SIZE, 0, SQUARE_SIZE, SQUARE_SIZE)
@@ -91,11 +98,10 @@ def draw_board():
     text = font.render("Restart", True, BLACK)
     text_rect = text.get_rect(center=button_rect.center)
     screen.blit(text, text_rect)
-    
-	# Boton salir
+
+    # Botón Quit
     pygame.draw.rect(screen, GRAY, quit_button)
     pygame.draw.rect(screen, BLACK, quit_button, 2)
-    font = pygame.font.SysFont(None, 40)
     text = font.render("Quit", True, BLACK)
     text_rect = text.get_rect(center=quit_button.center)
     screen.blit(text, text_rect)
